@@ -1,6 +1,4 @@
 package edu.empleado.mx.view;
-
-import edu.empleado.mx.bo.EmpleadoBO;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,8 +10,6 @@ public class FrmUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form FrmEmpleados
      */
-    
-    private EmpleadoBO ebo = new EmpleadoBO();
     
     public FrmUsuarios() {
         initComponents();
