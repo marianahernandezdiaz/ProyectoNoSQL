@@ -10,19 +10,33 @@ import java.sql.Statement;
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
 
-/**
- *
- * @author Jonathan Esquivel Flores db gme varchar20 nomgme varchar60
- */
-public class Conexion {
+public class Conexion 
+{
+    static final String DB_URL = "jdbc:oracle:thin:@proyecto_high?TNS_ADMIN=D:/JonathanFlores/DDocuments/ITTOL/NOSQL/Wallet_PROYECTO"; //poner la ubicacion de la wallet descomprimida
+    static final String DB_USER = "ADMIN";
+    static final String DB_PASSWORD = "VampBD220203";
+    static final String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";
+    
+    public static void main(String[] args) throws Exception 
+    {
+        getConnection();
+    }
+    
+    private static void doSQLWork(Connection conn) throws SQLException {
+        String query = "SELECT table_name FROM user_tables FETCH FIRST 5 ROWS ONLY";
 
-    public static void main(String[] args) throws Exception {
-        final String DB_URL = "jdbc:oracle:thin:@proyecto_high?TNS_ADMIN=C:/universidad/9np/NoSQL/Wallet_PROYECTO"; //poner la ubicacion de la wallet descomprimida
-        final String DB_USER = "ADMIN";
-        final String DB_PASSWORD = "VampBD220203";
-        final String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";
-
-        // Crear PoolDataSource
+        try (Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(query)) {
+            System.out.println("Tablas en tu esquema ADMIN:");
+            while (rs.next()) {
+                System.out.println(" - " + rs.getString(1));
+            }
+        }
+    }
+    
+    public static Connection getConnection() throws Exception
+    {
+         // Crear PoolDataSource
         PoolDataSource pds = PoolDataSourceFactory.getPoolDataSource();
 
         // Configuración de la fuente de datos
@@ -37,24 +51,15 @@ public class Conexion {
         pds.setMinPoolSize(3);
         pds.setMaxPoolSize(10);
 
-        try (Connection conn = pds.getConnection()) {
+        Connection conn = pds.getConnection();
+        try 
+        {
             System.out.println("✅ Conexión exitosa a Oracle Autonomous Database");
             doSQLWork(conn);
         } catch (SQLException e) {
             System.out.println("❌ Error en la conexión: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-    
-    private static void doSQLWork(Connection conn) throws SQLException {
-        String query = "SELECT table_name FROM user_tables FETCH FIRST 5 ROWS ONLY";
-
-        try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(query)) {
-            System.out.println("Tablas en tu esquema ADMIN:");
-            while (rs.next()) {
-                System.out.println(" - " + rs.getString(1));
-            }
-        }
+        return conn;
     }
 }
