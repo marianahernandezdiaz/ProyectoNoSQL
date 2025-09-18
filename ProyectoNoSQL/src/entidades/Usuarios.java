@@ -78,6 +78,56 @@ public class Usuarios
     public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
+
+    public String getTcorreo()
+    {
+        return tcorreo;
+    }
+
+    public void setTcorreo(String tcorreo)
+    {
+        this.tcorreo = tcorreo;
+    }
+
+    public String getCurp()
+    {
+        return curp;
+    }
+
+    public void setCurp(String curp)
+    {
+        this.curp = curp;
+    }
+
+    public String getRfc()
+    {
+        return rfc;
+    }
+
+    public void setRfc(String rfc)
+    {
+        this.rfc = rfc;
+    }
+
+    public int getTelefono()
+    {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono)
+    {
+        this.telefono = telefono;
+    }
+
+    public String getIdDepto()
+    {
+        return idDepto;
+    }
+
+    public void setIdDepto(String idDepto)
+    {
+        this.idDepto = idDepto;
+    }
     
     @Override
     public String toString() {
@@ -94,8 +144,5 @@ public class Usuarios
        ", sexo=" + sexo + 
        ", estatus=" + estatus + 
        '}';
-
     }
-    
-    
 }
