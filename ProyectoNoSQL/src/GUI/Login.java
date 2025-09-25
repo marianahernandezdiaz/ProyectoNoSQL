@@ -24,7 +24,7 @@ public class Login extends JFrame {
         leftPanel.setLayout(new BorderLayout());
 
         // Imagen ilustrativa
-        ImageIcon imageIcon = new ImageIcon("src/resources/login.png"); // Cambia por tu imagen
+        ImageIcon imageIcon = new ImageIcon("src/resources/login.png");
         JLabel imageLabel = new JLabel(imageIcon);
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         leftPanel.add(imageLabel, BorderLayout.CENTER);
@@ -73,11 +73,46 @@ public class Login extends JFrame {
         add(rightPanel, BorderLayout.CENTER);
 
         setVisible(true);
+
+
+
+//accion del boton LOGIN
+        loginButton.addActionListener(e -> {
+        String username = userField.getText();
+        String password = new String(passField.getPassword());
+
+        // Llamamos al nuevo método de autenticación directa
+        if (db.Conexion.autenticarUsuarioDB(username, password)) {
+            JOptionPane.showMessageDialog(this,
+                    "¡Login exitoso! Bienvenido " + username + ".",
+                    "Acceso Concedido",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // Aquí podrías cerrar esta ventana y abrir la principal
+            // dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Usuario o contraseña de base de datos incorrectos.",
+                    "Error de Acceso",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        });
+        
+
+        
+        
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Login::new);
     }
+    
+    
+
+    
+    
+    
 
     // Clase para JTextField con bordes redondeados
     class RoundedTextField extends JTextField {
