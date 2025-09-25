@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 package GUI;
+
 import java.awt.event.ActionEvent;
-=======
-package edu.empleado.mx.view;
->>>>>>> a8c8160d3957362d78eaf85a93032347ecd23fad
 import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import java.sql.Connection;
