@@ -82,7 +82,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
         etiquetaSexo = new javax.swing.JLabel();
         // Menú desplegable (ComboBox) para seleccionar el género del usuario.
         selectorGenero = new javax.swing.JComboBox<>();
-        // Menú desplegable (ComboBox) para seleccionar el estatus del usuario (Activo/Baja).
+        
         selectorDepartamento = new javax.swing.JComboBox<>();
         // Botón para ejecutar la acción de agregar un nuevo usuario.
         botonAgregar = new javax.swing.JButton();
