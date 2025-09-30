@@ -1,0 +1,21 @@
+# Archivos compilados de Java
+*.class
+/build/
+/out/
+/target/
+
+# Logs
+*.log
+
+# Paquetes
+*.jar
+*.war
+*.ear
+
+# Archivos de IDEs
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+*.vscode/

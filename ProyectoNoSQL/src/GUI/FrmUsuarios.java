@@ -1,5 +1,14 @@
-package edu.empleado.mx.view;
+package GUI;
+
+import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -13,6 +22,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
     
     public FrmUsuarios() {
         initComponents();
+        cargarDepartamentos();
     }
 
     public void listarEmpleado()
@@ -27,453 +37,594 @@ public class FrmUsuarios extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
+        // --- DECLARACIÓN DE COMPONENTES ---
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtNoEmp = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtPriAp = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtSecAp = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtTel = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txtNom = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        txtPswd = new javax.swing.JPasswordField();
-        jLabel18 = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JComboBox<>();
-        txtEstatus = new javax.swing.JComboBox<>();
-        btnAgregar = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
-        btnClean = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        btnSalir1 = new javax.swing.JButton();
-        txtTel1 = new javax.swing.JTextField();
-        txtTel2 = new javax.swing.JTextField();
+        // Agrupa componentes como radio buttons para que solo uno pueda ser seleccionado a la vez.
+        grupoBotones = new javax.swing.ButtonGroup();
+        // Panel principal que actúa como contenedor para todos los demás componentes.
+        panelPrincipal = new javax.swing.JPanel();
+        // Etiqueta para el campo "Número de Empleado".
+        etiquetaNumeroEmpleado = new javax.swing.JLabel();
+        // Campo de texto para que el usuario ingrese el número de empleado.
+        campoNumeroEmpleado = new javax.swing.JTextField();
+        // Etiqueta que muestra el título del formulario, por ejemplo, "Altas usuarios".
+        etiquetaTitulo = new javax.swing.JLabel();
+        // Etiqueta para el campo "Nombre(s)".
+        etiquetaNombres = new javax.swing.JLabel();
+        // Campo de texto para ingresar el apellido paterno del usuario.
+        campoApellidoPaterno = new javax.swing.JTextField();
+        // Etiqueta para el campo "Primer apellido".
+        etiquetaApellidoPaterno = new javax.swing.JLabel();
+        // Campo de texto para ingresar el apellido materno del usuario.
+        campoApellidoMaterno = new javax.swing.JTextField();
+        // Etiqueta para el campo "Segundo apellido".
+        etiquetaApellidoMaterno = new javax.swing.JLabel();
+        // Campo de texto para el correo electrónico principal.
+        campoEmailPrincipal = new javax.swing.JTextField();
+        // Etiqueta para el campo "Correo principal".
+        etiquetaEmailPrincipal = new javax.swing.JLabel();
+        // Etiqueta para el campo "Correo secundario".
+        etiquetaEmailSecundario = new javax.swing.JLabel();
+        // Campo de texto para el RFC del usuario.
+        campoRfc = new javax.swing.JTextField();
+        // Etiqueta para el campo "Teléfono".
+        etiquetaTelefono = new javax.swing.JLabel();
+        // Campo de texto para los nombres del usuario.
+        campoNombres = new javax.swing.JTextField();
+        // Etiqueta sin texto, usada probablemente para alineación o un propósito futuro.
+        etiquetaVacia1 = new javax.swing.JLabel();
+        // Etiqueta para el campo "Departamento".
+        etiquetaDepartamento = new javax.swing.JLabel();
+        // Campo de texto seguro para la contraseña del usuario.
+        campoEmailSecundario = new javax.swing.JTextField();
+        // Etiqueta para el campo "Sexo".
+        etiquetaSexo = new javax.swing.JLabel();
+        // Menú desplegable (ComboBox) para seleccionar el género del usuario.
+        selectorGenero = new javax.swing.JComboBox<>();
+        
+        selectorDepartamento = new javax.swing.JComboBox<>();
+        // Botón para ejecutar la acción de agregar un nuevo usuario.
+        botonAgregar = new javax.swing.JButton();
+        // Botón con el texto "Siguiente", para pasar a otra pantalla o paso.
+        botonSiguiente = new javax.swing.JButton();
+        // Botón para limpiar todos los campos del formulario.
+        botonLimpiar = new javax.swing.JButton();
+        // Etiqueta para el campo "RFC".
+        etiquetaRfc = new javax.swing.JLabel();
+        // Etiqueta para el campo "CURP".
+        etiquetaCurp = new javax.swing.JLabel();
+        // Botón para cerrar el formulario o la aplicación.
+        botonSalir = new javax.swing.JButton();
+        // Campo de texto para el número de teléfono del usuario.
+        campoTelefono = new javax.swing.JTextField();
+        // Campo de texto para el CURP del usuario.
+        campoCurp = new javax.swing.JTextField();
 
+        // --- CONFIGURACIÓN DE LA VENTANA Y PANELES ---
+
+        // Define que la aplicación se cerrará al hacer clic en la 'X' de la ventana.
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        // Establece un layout absoluto para posicionar componentes por coordenadas exactas.
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        // Configura el panel principal con un fondo blanco y layout absoluto.
+        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Numero de Empleado:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        // --- CONFIGURACIÓN Y POSICIONAMIENTO DE CADA COMPONENTE ---
 
-        txtNoEmp.setBackground(new java.awt.Color(255, 255, 255));
-        txtNoEmp.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtNoEmp.setForeground(new java.awt.Color(0, 0, 0));
-        txtNoEmp.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtNoEmpActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtNoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 220, -1));
+        // Configura la etiqueta "Numero de Empleado"
+        etiquetaNumeroEmpleado.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaNumeroEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaNumeroEmpleado.setText("Numero de Empleado:");
+        panelPrincipal.add(etiquetaNumeroEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Altas usuarios");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
+        // Configura el campo de texto para el número de empleado
+        campoNumeroEmpleado.setBackground(new java.awt.Color(255, 255, 255));
+        campoNumeroEmpleado.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoNumeroEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        campoNumeroEmpleado.addActionListener(evt -> txtNoEmpActionPerformed(evt));
+        panelPrincipal.add(campoNumeroEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 220, -1));
 
-        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Nombre(s): ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        // Configura la etiqueta del título
+        etiquetaTitulo.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18));
+        etiquetaTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaTitulo.setText("Altas usuarios");
+        panelPrincipal.add(etiquetaTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
-        txtPriAp.setBackground(new java.awt.Color(255, 255, 255));
-        txtPriAp.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtPriAp.setForeground(new java.awt.Color(0, 0, 0));
-        txtPriAp.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtPriApActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPriAp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 250, -1));
+        // Configura la etiqueta "Nombre(s)"
+        etiquetaNombres.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaNombres.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaNombres.setText("Nombre(s): ");
+        panelPrincipal.add(etiquetaNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Primer apellido:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
+        // Configura el campo para el Apellido Paterno (antes txtPriAp)
+        campoApellidoPaterno.setBackground(new java.awt.Color(255, 255, 255));
+        campoApellidoPaterno.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoApellidoPaterno.setForeground(new java.awt.Color(0, 0, 0));
+        campoApellidoPaterno.addActionListener(evt -> txtPriApActionPerformed(evt));
+        panelPrincipal.add(campoApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 250, -1));
 
-        txtSecAp.setBackground(new java.awt.Color(255, 255, 255));
-        txtSecAp.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtSecAp.setForeground(new java.awt.Color(153, 153, 153));
-        txtSecAp.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtSecApActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtSecAp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 250, -1));
+        // Configura la etiqueta "Primer apellido"
+        etiquetaApellidoPaterno.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaApellidoPaterno.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaApellidoPaterno.setText("Apellido Paterno:");
+        panelPrincipal.add(etiquetaApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Segundo apellido:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, 20));
+        // Configura el campo para el Apellido Materno (antes txtSecAp)
+        campoApellidoMaterno.setBackground(new java.awt.Color(255, 255, 255));
+        campoApellidoMaterno.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoApellidoMaterno.setForeground(new java.awt.Color(153, 153, 153));
+        campoApellidoMaterno.addActionListener(evt -> txtSecApActionPerformed(evt));
+        panelPrincipal.add(campoApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 250, -1));
 
-        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
-        txtEmail.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(153, 153, 153));
-        txtEmail.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtEmailActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 260, -1));
+        // Configura la etiqueta "Segundo apellido"
+        etiquetaApellidoMaterno.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaApellidoMaterno.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaApellidoMaterno.setText("Apellido Materno:");
+        panelPrincipal.add(etiquetaApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, 20));
 
-        jLabel6.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Correo principal:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+        
 
-        jLabel7.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Correo secundario:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
+        // Configura la etiqueta "Correo principal"
+        etiquetaEmailPrincipal.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaEmailPrincipal.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaEmailPrincipal.setText("Correo principal:");
+        panelPrincipal.add(etiquetaEmailPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
 
-        txtTel.setBackground(new java.awt.Color(255, 255, 255));
-        txtTel.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtTel.setForeground(new java.awt.Color(0, 0, 0));
-        txtTel.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtTelActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 250, -1));
+        // Configura la etiqueta "Correo secundario"
+        etiquetaEmailSecundario.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaEmailSecundario.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaEmailSecundario.setText("Correo secundario:");
+        panelPrincipal.add(etiquetaEmailSecundario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Telefono:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, -1));
+        // Configura el campo para el RFC
+        campoRfc.setBackground(new java.awt.Color(255, 255, 255));
+        campoRfc.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoRfc.setForeground(new java.awt.Color(0, 0, 0));
+        campoRfc.addActionListener(evt -> txtTelActionPerformed(evt));
+        panelPrincipal.add(campoRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 250, -1));
 
-        txtNom.setBackground(new java.awt.Color(255, 255, 255));
-        txtNom.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtNom.setForeground(new java.awt.Color(0, 0, 0));
-        txtNom.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtNomActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 250, -1));
+        // Configura la etiqueta "Telefono"
+        etiquetaTelefono.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaTelefono.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaTelefono.setText("Telefono:");
+        panelPrincipal.add(etiquetaTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        // Configura el campo para el nombre
+        campoNombres.setBackground(new java.awt.Color(255, 255, 255));
+        campoNombres.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoNombres.setForeground(new java.awt.Color(0, 0, 0));
+        campoNombres.addActionListener(evt -> txtNomActionPerformed(evt));
+        panelPrincipal.add(campoNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 250, -1));
 
-        jLabel16.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel16.setText("Departamento:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
+         //Configura la etiqueta vacía (posiblemente para espaciado)
+        etiquetaVacia1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaVacia1.setForeground(new java.awt.Color(0, 0, 0));
+        panelPrincipal.add(etiquetaVacia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        txtPswd.setBackground(new java.awt.Color(255, 255, 255));
-        txtPswd.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtPswd.setForeground(new java.awt.Color(0, 0, 0));
-        txtPswd.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtPswdActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPswd, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 260, -1));
+        // Configura la etiqueta "Departamento"
+        etiquetaDepartamento.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaDepartamento.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaDepartamento.setText("Departamento:");
+        panelPrincipal.add(etiquetaDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, -1, -1));
+        
+        // Configura el campo para el email principal
+        campoEmailPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        campoEmailPrincipal.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoEmailPrincipal.setForeground(new java.awt.Color(153, 153, 153));
+        campoEmailPrincipal.addActionListener(evt -> txtEmailActionPerformed(evt));
+        panelPrincipal.add(campoEmailPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 260, -1));
 
-        jLabel18.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel18.setText("Sexo:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
+        // Configura el campo para la contraseña
+        campoEmailSecundario.setBackground(new java.awt.Color(255, 255, 255));
+        campoEmailSecundario.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoEmailSecundario.setForeground(new java.awt.Color(0, 0, 0));
+        campoEmailSecundario.addActionListener(evt -> txtEmail2ActionPerformed(evt));
+        panelPrincipal.add(campoEmailSecundario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 260, -1));
 
-        txtGenero.setBackground(new java.awt.Color(255, 255, 255));
-        txtGenero.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtGenero.setForeground(new java.awt.Color(0, 0, 0));
-        txtGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elije una opción", "H", "M", "O" }));
-        txtGenero.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtGeneroActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+        // Configura la etiqueta "Sexo"
+        etiquetaSexo.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaSexo.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaSexo.setText("Sexo:");
+        panelPrincipal.add(etiquetaSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
 
-        txtEstatus.setBackground(new java.awt.Color(255, 255, 255));
-        txtEstatus.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtEstatus.setForeground(new java.awt.Color(0, 0, 0));
-        txtEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elije una opción", "ACTIVO", "BAJA" }));
-        txtEstatus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtEstatusActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 150, -1));
+        // Configura el selector de género
+        selectorGenero.setBackground(new java.awt.Color(255, 255, 255));
+        selectorGenero.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        selectorGenero.setForeground(new java.awt.Color(0, 0, 0));
+        selectorGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elije una opción", "FEMENINO", "MASCULINO", "OTRO" }));
+        selectorGenero.addActionListener(evt -> txtGeneroActionPerformed(evt));
+        panelPrincipal.add(selectorGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
-        btnAgregar.setBackground(new java.awt.Color(153, 153, 153));
-        btnAgregar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(0, 0, 0));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+        // Configura el selector de estatus
+        selectorDepartamento.setBackground(new java.awt.Color(255, 255, 255));
+        selectorDepartamento.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        selectorDepartamento.setForeground(new java.awt.Color(0, 0, 0));
+        //selectorEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elije una opción", "ACTIVO", "BAJA" }));
+        selectorDepartamento.addActionListener(evt -> txtselectorDepartamentoActionPerformed(evt));
+        panelPrincipal.add(selectorDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 150, -1));
 
-        btnSalir.setBackground(new java.awt.Color(153, 153, 153));
-        btnSalir.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir.setText("Siguiente");
-        btnSalir.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+        // Configura el botón "Agregar"
+        botonAgregar.setBackground(new java.awt.Color(153, 153, 153));
+        botonAgregar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12));
+        botonAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        botonAgregar.setText("Agregar");
+        botonAgregar.addActionListener(evt -> botonAgregarActionPerformed(evt));
+        panelPrincipal.add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
 
-        btnClean.setBackground(new java.awt.Color(153, 153, 153));
-        btnClean.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        btnClean.setForeground(new java.awt.Color(0, 0, 0));
-        btnClean.setText("Limpiar");
-        btnClean.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnCleanActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, -1, -1));
+        // Configura el botón "Siguiente"
+        botonSiguiente.setBackground(new java.awt.Color(153, 153, 153));
+        botonSiguiente.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12));
+        botonSiguiente.setForeground(new java.awt.Color(0, 0, 0));
+        botonSiguiente.setText("Siguiente");
+        botonSiguiente.addActionListener(evt -> btnSalirActionPerformed(evt));
+        panelPrincipal.add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("RFC:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
+        // Configura el botón "Limpiar"
+        botonLimpiar.setBackground(new java.awt.Color(153, 153, 153));
+        botonLimpiar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12));
+        botonLimpiar.setForeground(new java.awt.Color(0, 0, 0));
+        botonLimpiar.setText("Limpiar");
+        botonLimpiar.addActionListener(evt -> btnCleanActionPerformed(evt));
+        panelPrincipal.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("CURP:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+        // Configura la etiqueta "RFC"
+        etiquetaRfc.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaRfc.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaRfc.setText("RFC:");
+        panelPrincipal.add(etiquetaRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
 
-        btnSalir1.setBackground(new java.awt.Color(153, 153, 153));
-        btnSalir1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        btnSalir1.setForeground(new java.awt.Color(0, 0, 0));
-        btnSalir1.setText("Salir");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnSalir1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, -1, -1));
+        // Configura la etiqueta "CURP"
+        etiquetaCurp.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14));
+        etiquetaCurp.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaCurp.setText("CURP:");
+        panelPrincipal.add(etiquetaCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
 
-        txtTel1.setBackground(new java.awt.Color(255, 255, 255));
-        txtTel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtTel1.setForeground(new java.awt.Color(0, 0, 0));
-        txtTel1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtTel1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtTel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 260, -1));
+        // Configura el botón "Salir"
+        botonSalir.setBackground(new java.awt.Color(153, 153, 153));
+        botonSalir.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12));
+        botonSalir.setForeground(new java.awt.Color(0, 0, 0));
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(evt -> btnSalir1ActionPerformed(evt));
+        panelPrincipal.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, -1, -1));
 
-        txtTel2.setBackground(new java.awt.Color(255, 255, 255));
-        txtTel2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        txtTel2.setForeground(new java.awt.Color(0, 0, 0));
-        txtTel2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtTel2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtTel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 250, -1));
+        // Configura el campo para el teléfono
+        campoTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        campoTelefono.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoTelefono.setForeground(new java.awt.Color(0, 0, 0));
+        campoTelefono.addActionListener(evt -> txtTel1ActionPerformed(evt));
+        panelPrincipal.add(campoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 260, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 430));
+        // Configura el campo para el CURP
+        campoCurp.setBackground(new java.awt.Color(255, 255, 255));
+        campoCurp.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12));
+        campoCurp.setForeground(new java.awt.Color(0, 0, 0));
+        campoCurp.addActionListener(evt -> txtTel2ActionPerformed(evt));
+        panelPrincipal.add(campoCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 250, -1));
 
+        // --- FINALIZACIÓN ---
+
+        // Añade el panel principal al contenido de la ventana.
+        getContentPane().add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 430));
+
+        // Ajusta el tamaño de la ventana para que se adapte a sus componentes.
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+       
+    }
 
-    private void txtNoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoEmpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNoEmpActionPerformed
+   
+    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {
+        // Validación usando los nuevos nombres de variables
 
-    private void txtPriApActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriApActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriApActionPerformed
+    // Definimos la consulta SQL con placeholders (?) para seguridad
+        String sql = "INSERT INTO USUARIOS (NO_USUARIO, NOMBRE, APELLIDO_PAT, APELLIDO_MAT, CURP, RFC, TELEFONO, ID_DEPTO, SEXO, ESTATUS, CORREO_PRINCIPAL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql2 = "INSERT INTO CORREOS_SECUNDARIOS (NO_USUARIO, CORREO)";
+    // 3. --- LÓGICA DE INSERCIÓN EN LA BD ---
+    // Usamos try-with-resources para que la conexión y el statement se cierren solos
+        try (Connection conn = db.Conexion.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-    private void txtSecApActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSecApActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSecApActionPerformed
+            // Asignamos cada variable a su placeholder correspondiente, en orden
+            pstmt.setInt(1, Integer.parseInt(campoNumeroEmpleado.getText()));
+            pstmt.setString(2, campoNombres.getText());
+            pstmt.setString(3, campoApellidoPaterno.getText());
+            pstmt.setString(4, campoApellidoMaterno.getText());
+            pstmt.setString(5, campoCurp.getText());
+            pstmt.setString(6, campoRfc.getText());
+            pstmt.setString(7, campoTelefono.getText());
+            pstmt.setString(8, selectorDepartamento.getSelectedItem().toString());
+            pstmt.setString(9, selectorGenero.getSelectedItem().toString());
+            pstmt.setString(10, "ACTIVO");
+            pstmt.setString(11, campoEmailPrincipal.getText());
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+            
+            String nombre = campoNombres.getText();
+            String apellidoPat = campoApellidoPaterno.getText();
+            String apellidoMat = campoApellidoMaterno.getText();
+            String curp = campoCurp.getText();
+            String rfc = campoRfc.getText();
+            String telefono = campoTelefono.getText();
+            String correo = campoEmailPrincipal.getText();
+            String idDepto = (String) selectorDepartamento.getSelectedItem(); // Suponiendo un JComboBox
+            String sexo = (String) selectorGenero.getSelectedItem(); 
+            
+            String error = validarDatosUsuario(nombre, apellidoPat, apellidoMat, curp, rfc, telefono, correo, idDepto, sexo);
+        
+            if (error != null) {
+                // Si 'error' no es nulo, significa que una validación falló.
+                JOptionPane.showMessageDialog(this, error, "Datos Inválidos", JOptionPane.WARNING_MESSAGE);
+                return; // Detiene el proceso, no se guarda nada.
+            }
+// Ejecutamos la inserción y verificamos el resultado
+            int filasAfectadas = pstmt.executeUpdate();
+            
+            
+            
 
-    private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelActionPerformed
+            JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente (simulación).");
+            botonLimpiarActionPerformed(null); // Llamamos a limpiar el formulario
 
-    private void txtNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomActionPerformed
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El número de empleado debe ser un valor numérico.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al agregar el usuario: " + e.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        
+        //quitamos espacios en blanco
+        String emailSecundario = campoEmailSecundario.getText().trim();
 
-    private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGeneroActionPerformed
+        //Ejecuta este bloque SOLAMENTE si el campo de texto NO está vacío.
+        if (!emailSecundario.isEmpty()) {
+            try (Connection conn = db.Conexion.getConnection();
+             PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
+                pstmt2.setString(1, campoNumeroEmpleado.getText());
+                pstmt2.setString(2, campoEmailSecundario.getText());
+            
+            int filasAfectadas = pstmt2.executeUpdate();
+            
+            
+            
+            }catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El correo debe ser real", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al agregar el usuario: " + e.getMessage(), "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+        
+        
+    }
 
-    private void txtEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEstatusActionPerformed
-
-    private void txtPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPswdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPswdActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if (txtNoEmp.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtNom.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtPriAp.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtSecAp.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtEmail.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtPswd.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtTel.getText().isEmpty()) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtGenero.getSelectedItem() == null) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-        else if (txtEstatus.getSelectedItem() == null) JOptionPane.showMessageDialog(null,"Llene todos los campos.");
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {
+        // Lógica para el botón "Siguiente"
         System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }
 
-    private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
-        txtNoEmp.setText("");
-        txtNom.setText("");
-        txtPriAp.setText("");
-        txtSecAp.setText("");
-        txtEmail.setText("");
-        txtPswd.setText("");
-        txtTel.setText("");
-        txtGenero.removeAllItems();
-        txtEstatus.removeAllItems();
-    }//GEN-LAST:event_btnCleanActionPerformed
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
+        // Limpieza de campos usando los nuevos nombres y la lógica corregida
+        campoNumeroEmpleado.setText("");
+        campoNombres.setText("");
+        campoApellidoPaterno.setText("");
+        campoApellidoMaterno.setText("");
+        campoEmailPrincipal.setText("");
+        campoEmailSecundario.setText("");
+        campoRfc.setText("");
+        campoCurp.setText("");
+        campoTelefono.setText("");
+        
+        // CORRECCIÓN: Reinicia la selección en lugar de borrar los items.
+        selectorGenero.setSelectedIndex(0);
+        selectorDepartamento.setSelectedIndex(0);
+    }
 
-    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSalir1ActionPerformed
-    {//GEN-HEADEREND:event_btnSalir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir1ActionPerformed
+    
+    
+    
+    //recorrer deptos
+    private void cargarDepartamentos() {
+        // 1. Crea un modelo para el ComboBox. Es la forma correcta de llenarlo dinámicamente.
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        modelo.addElement("Seleccione un departamento"); // Texto inicial
 
-    private void txtTel1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtTel1ActionPerformed
-    {//GEN-HEADEREND:event_txtTel1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTel1ActionPerformed
+        // 2. Define la consulta SQL para obtener los IDs de los departamentos.
+        //    ¡Asegúrate de que el nombre de la tabla 'DEPARTAMENTOS' sea correcto!
+        String sql = "SELECT ID_DEPTO FROM DEPARTAMENTOS WHERE ESTATUS = 'ACTIVO' ORDER BY ID_DEPTO";
 
-    private void txtTel2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtTel2ActionPerformed
-    {//GEN-HEADEREND:event_txtTel2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTel2ActionPerformed
+        // 3. Usa try-with-resources para conectar y ejecutar la consulta de forma segura.
+        try (Connection conn = db.Conexion.getConnection(); // Usa tu clase de conexión
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-    /**
-     * @param args the command line arguments
-     */
+            // 4. Recorre los resultados y añádelos al modelo.
+            while (rs.next()) {
+                System.out.println("si lee");
+                String idDepto = rs.getString("ID_DEPTO");
+                modelo.addElement(idDepto);
+            }
+
+            // 5. Asigna el modelo ya lleno a tu JComboBox.
+            selectorDepartamento.setModel(modelo);
+
+        } catch (Exception e) {
+            // 6. Maneja cualquier error que pueda ocurrir.
+            JOptionPane.showMessageDialog(this,
+                    "Error al cargar los departamentos: " + e.getMessage(),
+                    "Error de Base de Datos",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+    
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Windows".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
-        {
-            java.util.logging.Logger.getLogger(FrmUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(FrmUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(FrmUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(FrmUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmUsuarios().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FrmUsuarios().setVisible(true);
         });
     }
+    
+    //validar datos
+    public String validarDatosUsuario(String nombre, String apellidoPat, String apellidoMat,
+                                      String curp, String rfc, String telefono,
+                                      String correo, String idDepto, String sexo) {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnClean;
-    private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnSalir1;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JComboBox<String> txtEstatus;
-    private javax.swing.JComboBox<String> txtGenero;
-    private javax.swing.JTextField txtNoEmp;
-    private javax.swing.JTextField txtNom;
-    private javax.swing.JTextField txtPriAp;
-    private javax.swing.JPasswordField txtPswd;
-    private javax.swing.JTextField txtSecAp;
-    private javax.swing.JTextField txtTel;
-    private javax.swing.JTextField txtTel1;
-    private javax.swing.JTextField txtTel2;
-    // End of variables declaration//GEN-END:variables
+        // --- Restricciones NOT NULL y de longitud básica ---
+        if (nombre == null || nombre.trim().isEmpty()) return "El NOMBRE no puede estar vacío.";
+        if (nombre.length() > 40) return "El NOMBRE no puede exceder los 40 caracteres.";
+
+        if (apellidoPat.length() > 30) return "El APELLIDO PATERNO no puede exceder los 30 caracteres.";
+        if (apellidoMat.length() > 30) return "El APELLIDO MATERNO no puede exceder los 30 caracteres.";
+
+        if (curp == null || curp.trim().isEmpty()) return "El CURP no puede estar vacío.";
+        if (rfc == null || rfc.trim().isEmpty()) return "El RFC no puede estar vacío.";
+        if (telefono == null || telefono.trim().isEmpty()) return "El TELÉFONO no puede estar vacío.";
+        if (correo == null || correo.trim().isEmpty()) return "El CORREO no puede estar vacío.";
+        if (correo.length() > 200) return "El CORREO no puede exceder los 200 caracteres.";
+
+        if (idDepto == null || idDepto.trim().isEmpty()) return "Debe seleccionar un DEPARTAMENTO.";
+        if (sexo == null || sexo.trim().isEmpty()) return "Debe seleccionar un SEXO.";
+
+        // --- Restricciones CHECK (CHK_*) ---
+
+        // CHK_APELLIDOS: Al menos uno de los dos debe tener valor.
+        if ((apellidoPat == null || apellidoPat.trim().isEmpty()) && (apellidoMat == null || apellidoMat.trim().isEmpty())) {
+            return "Debe proporcionar al menos un APELLIDO (Paterno o Materno).";
+        }
+
+        // CHK_LONG_TEL: Teléfono debe tener 10 dígitos numéricos.
+        if (!telefono.matches("\\d{10}")) { // \\d es para un dígito, {10} es para 10 veces
+            return "El TELÉFONO debe contener exactamente 10 dígitos numéricos.";
+        }
+
+        // CHK_SEX: Sexo debe estar en la lista de valores permitidos.
+        List<String> sexosPermitidos = Arrays.asList("FEMENINO", "MASCULINO", "OTRO");
+        if (!sexosPermitidos.contains(sexo.toUpperCase())) {
+            return "El valor para SEXO no es válido. Use 'FEMENINO', 'MASCULINO' u 'OTRO'.";
+        }
+
+        // --- Restricciones de formato (REGEXP_LIKE) ---
+
+        // CHK_CURP
+        String regexCurp = "^[A-Z]{4}[0-9]{6}[A-Z]{6}[A-Z0-9]{2}$";
+        if (!curp.toUpperCase().matches(regexCurp)) {
+            return "El formato del CURP no es válido. Verifique los 18 caracteres.";
+        }
+
+        // CHK_RFC
+        String regexRfc = "^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$";
+        if (!rfc.toUpperCase().matches(regexRfc)) {
+            return "El formato del RFC no es válido. Verifique los 13 caracteres.";
+        }
+
+        // CHK_CORREO_PRINCIPAL_FORMAT
+        String regexCorreo = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        if (!correo.matches(regexCorreo)) {
+            return "El formato del CORREO ELECTRÓNICO no es válido.";
+        }
+
+        // Si todas las validaciones pasaron, no hay error.
+        return null;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                                              
+
+    private javax.swing.JButton botonAgregar;
+    private javax.swing.JButton botonLimpiar;
+    private javax.swing.JButton botonSiguiente;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JTextField campoApellidoMaterno;
+    private javax.swing.JTextField campoApellidoPaterno;
+    private javax.swing.JTextField campoEmailSecundario;
+    private javax.swing.JTextField campoCurp;
+    private javax.swing.JTextField campoEmailPrincipal;
+    private javax.swing.JTextField campoNombres;
+    private javax.swing.JTextField campoNumeroEmpleado;
+    private javax.swing.JTextField campoRfc;
+    private javax.swing.JTextField campoTelefono;
+    private javax.swing.JLabel etiquetaApellidoMaterno;
+    private javax.swing.JLabel etiquetaApellidoPaterno;
+    private javax.swing.JLabel etiquetaCurp;
+    private javax.swing.JLabel etiquetaDepartamento;
+    private javax.swing.JLabel etiquetaEmailPrincipal;
+    private javax.swing.JLabel etiquetaEmailSecundario;
+    private javax.swing.JLabel etiquetaNombres;
+    private javax.swing.JLabel etiquetaNumeroEmpleado;
+    private javax.swing.JLabel etiquetaRfc;
+    private javax.swing.JLabel etiquetaSexo;
+    private javax.swing.JLabel etiquetaTelefono;
+    private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JLabel etiquetaVacia1;
+    private javax.swing.ButtonGroup grupoBotones;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JComboBox<String> selectorDepartamento;
+    private javax.swing.JComboBox<String> selectorGenero;
+    // End of variables declaration                   
+
+    private void txtNoEmpActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtPriApActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtSecApActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtEmailActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtTelActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtNomActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtEmail2ActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtGeneroActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtselectorDepartamentoActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    private void btnSalirActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void btnCleanActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void btnSalir1ActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtTel1ActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void txtTel2ActionPerformed(ActionEvent evt) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
