@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import java.sql.Connection;
@@ -261,7 +262,23 @@ public class FrmUsuarios extends javax.swing.JFrame {
         botonSiguiente.setText("Siguiente");
         botonSiguiente.addActionListener(evt -> btnSalirActionPerformed(evt));
         panelPrincipal.add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+        
+        botonSiguiente.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // 1. Obtener el valor del campo de texto
+            int noUsuario = Integer.parseInt(campoNumeroEmpleado.getText());
+            
+            System.out.println(noUsuario);
+            // 2. Crear una nueva instancia de FrmDireccion y pasar el dato
+            FrmDireccion frmDireccion = new FrmDireccion(noUsuario);
+            frmDireccion.setVisible(true);
 
+            // Opcional: Cerrar la ventana actual si ya no la necesitas
+            // dispose(); 
+        }
+        });
+        
         // Configura el botón "Limpiar"
         botonLimpiar.setBackground(new java.awt.Color(153, 153, 153));
         botonLimpiar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12));
@@ -405,7 +422,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
 
     private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
         // Limpieza de campos usando los nuevos nombres y la lógica corregida
-        campoNumeroEmpleado.setText("");
+        //campoNumeroEmpleado.setText("");
         campoNombres.setText("");
         campoApellidoPaterno.setText("");
         campoApellidoMaterno.setText("");

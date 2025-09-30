@@ -361,8 +361,8 @@ public class FrmDireccion  extends JFrame{
             JOptionPane.showMessageDialog(this, "Error al cargar municipios.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new FrmDireccion(1));
-    }
+//
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> new FrmDireccion(2));
+//    }
 }

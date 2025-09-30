@@ -12,7 +12,7 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 
 public class Conexion 
 {
-    static final String DB_URL = "jdbc:oracle:thin:@proyecto_high?TNS_ADMIN=C:/UNI/9no/BDNoSQL/ProyectoNoSQL-main/Wallet_PROYECTO"; //poner la ubicacion de la wallet descomprimida
+    static final String DB_URL = "jdbc:oracle:thin:@proyecto_high?TNS_ADMIN=C:/universidad/9np/NoSQL/Wallet_PROYECTO"; //poner la ubicacion de la wallet descomprimida
     static final String DB_USER = "ADMIN";
     static final String DB_PASSWORD = "VampBD220203";
     static final String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";
